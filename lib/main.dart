@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:live_coding_lecture/home_page_with_set_state.dart';
+import 'package:live_coding_lecture/home_page_with_stream.dart';
 
-// The standard flutter example with the comment removed
-// Live coding starts 03.04.19
+// A revised example after a live coding session
+// the 03.04.19 10:00-12:00 in C007
 
+/// This starts the main flutter app
 void main() => runApp(MyApp());
 
+/// This is the main widget for the app
+/// It returns a Material app with a title, theme, and home
+///
+/// In this example two different variants of a widget is passed to home.
+///
+/// The first is one using the bloc-pattern, an architectural pattern relying
+/// on sinks and streams. This pattern cleanly separates buisness logic and the
+/// presentation.
+///
+/// The second is a simpler variant using setState(), however this method mixes
+/// the presentation with business logic.
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -13,56 +27,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePageWithBloc(title: 'Live Coding Tutorial'),
+      //home: MyHomePageWithSetState(title: 'Live Coding Tutorial'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
 
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
 
